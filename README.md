@@ -11,9 +11,9 @@ Things you may want to cover:
 
 * Configuration
 
-* Database creation
+* Database creation(rails db:create)
 
-* Database initialization
+* Database initialization(rails g model <model_name> <attributes:data_type>)
 
 * How to run the test suite
 
