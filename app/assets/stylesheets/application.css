@@ -14,6 +14,10 @@
  *= require_self
  */
 /* All Airlines Show */
+*{
+    margin: 0;
+    padding: 0;
+}
  .home{
     display: flex;
     flex-flow: column wrap;
@@ -83,17 +87,43 @@
 .wrapper{
     margin-left:auto;
     margin-right:auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
 }
 .column{
     background: #fff;
     height: 100vh;
+    width: 50%;
     overflow: scroll;
 }
 .column:last-child{
     background: #000;
+    width: 50%;
 }
 .main{
-    padding-left: 50px;
+    padding-left: 100px;
+}
+.header-wrapper{
+    padding: 50px 50px 50px 0;
+}
+.header-wrapper img{
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: -8px;
+}
+.header-wrapper h1{
+    font-size: 70px;
+    padding: 10px 0;
+}
+.totatReviews{
+    font-size: 50px;
+    padding: 10px 0;
+}
+.totalOutOf{
+    font-size: 50px;
+    font-weight: bold;
+    padding: 10px 0;
 }

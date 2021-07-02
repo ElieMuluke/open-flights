@@ -5,7 +5,7 @@ const Header = (props) => {
     const total = props.reviews.length
 
     return(
-        <div className="wrapper">
+        <div className="header-wrapper">
             <h1><img src={image_url} alt={name} />{name}</h1>
             <div className="totatReviews">{total} User Reviews</div>
             <div className="starRating"></div>
