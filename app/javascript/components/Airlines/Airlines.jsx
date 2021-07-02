@@ -27,13 +27,13 @@ const Airlines = () =>{
     return(
         <div className="home">
             <div className="header">
-                <h1>OpenFlights</h1>
+                <h1>Open Flights</h1>
                 <div className="subheader">
-                    <h2>Honest, Unbiased airline reviews</h2>
+                    Honest, Unbiased airline reviews.
                 </div>
             </div>
-            <div className="grid">
-                <ul>
+            <div >
+                <ul className="grid">
                     {grid}
                 </ul>
             </div>
