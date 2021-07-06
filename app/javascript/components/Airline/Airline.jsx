@@ -2,6 +2,7 @@ import React, {useState, useEffect, Fragment} from "react"
 import axios from "axios"
 import Header from "./Header";
 import ReviewFrom from "./ReviewForm";
+import Review from "./Review";
 
 const Airline = (props) =>{
     const [airline, setAirline] = useState({})
@@ -20,26 +21,43 @@ const Airline = (props) =>{
         .catch(err => console.log(err))
     },[])
 
-    const handleChange = (e)=>{
+    const handleChange = (e) => {
         e.preventDefault()
 
         setReview(Object.assign({}, review, {[e.target.name]: e.target.value}))
+        console.log("review", review);
     }
-    const handleSubmit = (e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault()
 
         const csrfToken = document.querySelector("[name=csrf-token]").content
         axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken
 
-        const airline_id = airline.data.id
+        const airline_id = parseInt(airline.data.id)
         axios.post('/api/v1/reviews',{review, airline_id})
         .then(resp=>{
-            const included =[...airline.included, resp.data]
-            setAirline({title:'', description:'', score:0})
+            const included =[ ...airline.included, resp.data ]
+            setAirline({ ...airline, included})
+            setReview({title:'', description:'', score:0})
         })
-        .catch(err=>{})
+        .catch(err=>{console.log(err);})
     }
 
+    const setRating = (score, e) => {
+        e.preventDefault()
+        setReview({...review, score})
+     }
+    let reviews
+    if(loaded && airline.included){
+        reviews = airline.included.map((item, index)=>{
+            return(
+                <Review
+                    key={index}
+                    attributes={item.attributes}
+                />
+            )
+        })
+    }
     return(
         <div className="wrapper">
             {
@@ -51,13 +69,14 @@ const Airline = (props) =>{
                                 attributes={airline.data.attributes}
                                 reviews = {airline.included}
                             />
-                            <div className="reviews"></div>
+                            {reviews}
                         </div>
                     </div>
                     <div className="column">
                         <ReviewFrom
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
+                            setRating={setRating}
                             attributes={airline.data.attributes}
                             review={review}
                         />
